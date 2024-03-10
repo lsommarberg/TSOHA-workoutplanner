@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block title %}View completed workout{% endblock %}
+
+{% block content %}
+    <header class="site-header">
+        {% if completed_workout %}
+            <h1>{{ completed_workout[3] }}</h1>
+            <p>Date: {{ completed_workout[5] }}</p> 
+        {% else %}
+            <h1>Workout Not Found</h1>
+        {% endif %}
+    </header>
+    <div class="container mt-4">
+        <header class="sub-header">
+            <h2>Exercises</h2>
+        </header>
+        <ul>
+            {% for exercise_data, exercise_name in user_workout %}
+                <li>
+                    <strong>Exercise Name:</strong> {{ exercise_name }}
+                    <br>
+                    <strong>Reps completed:</strong>
+                    {% if exercise_data[1] is not none %}
+                    {{ exercise_data[1] }}
+                    {% else %}
+                        No reps recorded
+                    {% endif %}
+                    <br>
+                    <strong>Weight lifted:</strong>
+                    {% if exercise_data[2] is not none %}
+                        {{ exercise_data[2] }}
+                    {% else %}
+                        No weights recorded
+                    {% endif %}
+                    <br>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="container mt-4">
+            <a href="{{ url_for('completed_workouts') }}" class="btn btn-primary">Back</a>
+            <a href="{{ url_for('delete_completed_workout', workout_id=completed_workout[0]) }}" class="btn btn-danger">Delete Workout</a>
+        </div>
+    </div>
+{% endblock %}

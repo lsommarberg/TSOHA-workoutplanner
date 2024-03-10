@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block title %}View Workout{% endblock %}
+
+{% block content %}
+    <header class="site-header">
+        {% if user_workout %}
+            <h1>{{ workout_name }}</h1>
+        {% else %}
+            <h1>Workout Not Found</h1>
+        {% endif %}
+    </header>
+    <div class="container mt-4">
+        <header class="sub-header">
+            <h2>Exercises</h2>
+        </header>
+        <ul>
+            {% for exercise_data, exercise_name in user_workout %}
+                <li>
+                    <strong>Exercise Name:</strong> {{ exercise_name }}
+                    <br>
+                    <strong>Sets Number:</strong> {{ exercise_data[3] }}
+                    <br>
+                    <strong>Reps per Set:</strong>
+                    {% if exercise_data[4] is not none %}
+                    {{ exercise_data[4]|join(', ') }}
+                    {% else %}
+                        No reps recorded
+                    {% endif %}
+                    <br>
+                    <strong>Weights per Set:</strong>
+                    {% if exercise_data[5] is not none %}
+                        {{ exercise_data[5]|join(', ') }}
+                    {% else %}
+                        No weights recorded
+                    {% endif %}
+                    <br>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="container mt-4">
+            <a href="{{ url_for('log_workout', workout_id=user_workout[0][0][1]) }}" class="btn btn-info">Log Workout</a>
+            <a href="{{ url_for('modify_workout', workout_id=user_workout[0][0][1]) }}" class="btn btn-light">Modify Workout</a>
+            <a href="{{ url_for('delete_user_workout', workout_id=user_workout[0][0][1]) }}" class="btn btn-danger">Delete Workout</a>
+        </div>
+        <div class="container mt-4">
+            <a href="{{ url_for('profile') }}" class="btn btn-primary">Back to Profile</a>
+        </div>
+        {% if message %}
+            <div class="alert alert-success mt-3">
+                {{ message }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

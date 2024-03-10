@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Add new sets{% endblock %}
+
+{% block content %}
+    <header class="site-header">
+        <h1>Add new sets</h1>
+    </header>
+    <div class="container">
+        <form action="{{ url_for('save_modified_workout') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <div class="workout-name">
+                Workout Name: {{ workout_name }}
+            </div>
+            <ol class="list-group list-group-light list-group-numbered">
+                {% for exercise_data, exercise_name in workout_exercises %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold exercise-name">{{ exercise_name }}</div>
+                        </div>
+                    </li>
+                    {% for set_num in range(1, exercise_data[3] + 1) %}
+                        <li class="list-group-item">
+                            <div class="form-row">
+                                <div class="col-1">
+                                    <div class="set-number">{{ set_num }}</div>
+                                </div>
+                                <div class="col">
+                                    <label for="reps_{{ exercise_data[0] }}_{{ set_num }}">Reps</label>
+                                    <input type="number" class="form-control" id="reps_{{ exercise_data[0] }}_{{ set_num }}" name="reps_{{ exercise_data[0] }}_{{ set_num }}" min="1">
+                                </div>
+                                <div class="col">
+                                    <label for="weight_{{ exercise_data[0] }}_{{ set_num }}">Weight (kg)</label>
+                                    <input type="number" step="0.1" class="form-control" id="weight_{{ exercise_data[0] }}_{{ set_num }}" name="weight_{{ exercise_data[0] }}_{{ set_num }}" min="0">
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ol>
+            <div class="container mt-4">
+                <button type="submit" class="btn btn-primary">Save Workout</button>
+                <a href="{{ url_for('view_workout', workout_id=original_workout) }}" class="btn btn-secondary">Cancel</a>
+                {% if error_message %}
+                <div class="alert alert-danger mt-3">
+                    {{ error_message }}
+                </div>
+        {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

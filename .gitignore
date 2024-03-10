@@ -1,0 +1,11 @@
+.env
+
+app.py.save
+
+venv/
+
+__pycache__/
+
+.vscode/
+
+.DS_Store

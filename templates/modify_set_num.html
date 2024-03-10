@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}Set setst{% endblock %}
+
+{% block content %}
+    <header class="site-header">
+        <h1>{{ workout_name }}</h1>
+    </header>
+    <div class="container mt-4">
+        <form action="{{ url_for('modify_sets_page') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <div class="container mt-4">
+                {% for exercise in workout_exercises %}
+                    <div class="mb-3">
+                        <label for="sets_number_{{ exercise[0] }}" class="form-label">Number of Sets for {{ exercise[1] }}</label>
+                        <input type="number" class="form-control" id="sets_number_{{ exercise[0] }}" name="sets_number_{{ exercise[0] }}" min="1">
+                    </div>
+                    <hr>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Continue</button>
+                <a href="{{ url_for('view_workout', workout_id=original_workout[0]) }}" class="btn btn-secondary">Cancel</a>
+            </div>
+            {% if error_message %}
+                <div class="alert alert-danger mt-3">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+        </form>
+        
+    </div>
+{% endblock %}

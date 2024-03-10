@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <header class="site-header">
+        <h1>Exercise List</h1>
+    </header>
+    <div class="container">
+        <ul class="list-group">
+            {% for exercise_name in exercise_names %}
+            <li class="list-group-item">
+                <span class="exercise-name">{{ exercise_name }}</span>
+                <div class="buttons-container">
+                    <a href="{{ url_for('exercise_details', exercise_name=exercise_name) }}" class="btn btn-primary">Details</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

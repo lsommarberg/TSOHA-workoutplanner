@@ -1,0 +1,114 @@
+
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Common styles for headers */
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 30px;
+    color: black;
+}
+
+/* style the navigation bar */
+nav {
+    background-color: #444;
+}
+
+/* style the navigation links */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+/* style the site header */
+header.site-header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    color: #333;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+/* common styles for containers */
+.container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* style the exercise list */
+.list-group {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.exercise-name {
+    flex: 1;
+    font-size: 18px;
+    overflow: hidden;
+    white-space: normal;
+}
+
+
+.buttons-container {
+    margin-left: 10px;
+    min-width: 100px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* style the login form container */
+.login-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+}
+
+/* custom class for aligning the login box to the left */
+.login-box {
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* styles for smaller headers */
+.sub-header {
+    text-align: left;
+    padding: 10px;
+    font-size: 24px;
+    color: black;
+    border-bottom: 1px solid #ccc;
+}

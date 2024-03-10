@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+    <header class="site-header">
+        <h1>User Profile</h1>
+    </header>
+    <header class="sub-header">
+        <h2>User Workouts</h2>
+    </header>
+    <div class="container">
+        {% if not user_workouts %}
+            <p>No workouts yet</p>
+        {% else %}
+            <ul>
+                {% for user_workout in user_workouts %}
+                    <li><a href="{{ url_for('view_workout', workout_id=user_workout[0]) }}">{{ user_workout[2] }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a href="{{ url_for('workout_exercises_list') }}">Create Workout</a>
+    </div>
+    <header class="sub-header">
+        <h2>Progress</h2>
+    </header>
+    <div class="container">
+        {% if not completed_workouts %}
+            <p>No completed workouts yet</p>
+        {% else %}
+            <ul>
+                <a href="{{ url_for('completed_workouts') }}">Completed workouts</a>
+            </ul>
+        {% endif %}
+    </div>
+    <div class="container">
+        <a href="{{ url_for('logout') }}">Log out</a>
+    </div>
+    <div class="container">
+        {% if message %}
+            <div class="alert alert-success mt-3">
+                {{ message }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

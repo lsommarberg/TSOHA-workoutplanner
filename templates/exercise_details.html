@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Exercise Details{% endblock %}
+
+{% block content %}
+    <header class="site-header">
+        <h1>{{ exercise[1] }}</h1>
+    </header>
+    <div class="container mt-4">
+        <p><strong>Muscle Group:</strong> {{ exercise[2]}}</p>
+        <br>
+        <p><strong>Details:</strong> {{ exercise[3] }}</p>
+    </div>
+    <div class="container mt-4">
+        <a href="{{ url_for('exercises_list') }}" class="btn btn-primary">Back to exercise list</a>
+    </div>
+{% endblock %}
